@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Músicas</title>
+</head>
+<body>
+    <h1>Lista de Músicas</h1>
+    
+    <ul>
+        {% for musica in musicas %}
+            <li>
+                <strong>
+                    <!-- Ao clicar no nome da música, o player de áudio será atualizado -->
+                    <a href="#" onclick="document.getElementById('audio-player').src = '{{ url_for('download', id=musica.id) }}'; document.getElementById('audio-player').play();">{{ musica.nome }}</a>
+                </strong> 
+                
+                <!-- Link para Download -->
+                <a href="{{ url_for('download', id=musica.id) }}">Baixar</a>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <br>
+    
+    <!-- Player de áudio que será usado para tocar a música -->
+    <audio id="audio-player" controls>
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+    
+    <br>
+    <a href="{{ url_for('upload') }}">Enviar Nova Música</a>
+</body>
+</html>
